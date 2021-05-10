@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
-use Facade\FlareClient\Http\Response;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -49,7 +47,20 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \IlluminateField 'password' doesn't have a default value
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UserUpdateRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update($request->only([
+            'last_name',
+            'first_name',
+            'email',
+        ]));
+        return response($user, 202);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
