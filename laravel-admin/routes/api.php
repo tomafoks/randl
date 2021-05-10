@@ -13,5 +13,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('login', 'AuthController@login');
-Route::apiResource('users', 'UserController');
+
+Route::post('login', 'AuthController@login')->name('login');
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::apiResource('users', 'UserController');
+});
