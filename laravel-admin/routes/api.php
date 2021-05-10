@@ -14,13 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-// Route::get('hello', function() {
-//     return 'Hello';
-// });
-
-Route::get('users', 'UserController@index');
-Route::get('users/{id}', 'UserController@show');
+Route::apiResource('users', 'UserController');
