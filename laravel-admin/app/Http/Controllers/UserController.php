@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
@@ -24,14 +26,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        $user = User::create([
-            'last_name' => $request->last_name,
-            'first_name' => $request->first_name,
-            'email' => $request->email,
-            'password' => bcrypt(123),
-        ]);
+        $user = User::create($request->only('last_name', 'first_name', 'email') + ['password' => bcrypt(123)]);
 
         return response($user, 201);
     }
@@ -52,20 +49,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->update([
-            'last_name' => $request->last_name,
-            'first_name' => $request->first_name,
-            'email' => $request->email,
-        ]);
-        return response($user, 202);
-    }
-
-    /**
+     * @return \IlluminateField 'password' doesn't have a default value
      * Remove the specified resource from storage.
      *
      * @param  int  $id
