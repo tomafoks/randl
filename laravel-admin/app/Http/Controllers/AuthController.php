@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,5 +22,13 @@ class AuthController extends Controller
         return response([
             'error' => 'Invalid Credentials'
         ], 401);
+    }
+
+    function register(RegisterRequest $request)
+    {
+        $user = User::create($request->only('last_name', 'first_name', 'email')
+            + ['password' => bcrypt($request->password)]);
+
+        return response($user, 201);
     }
 }
