@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateInfoRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -71,5 +75,32 @@ class UserController extends Controller
     {
         User::destroy($id);
         return response(null, 204);
+    }
+
+    public function user()
+    {
+        return Auth::user();
+    }
+
+    // Обновление профиля юзера
+    public function updateInfo(UpdateInfoRequest $request)
+    {
+        $user = Auth::user();
+        $user->update($request->only([
+            'last_name',
+            'first_name',
+            'email',
+        ]));
+        return response($user, 202);
+    }
+
+    // Обновление пароля юзера
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $user->update([
+            'password' => bcrypt($request->password),
+        ]);
+        return response($user, 202);
     }
 }
