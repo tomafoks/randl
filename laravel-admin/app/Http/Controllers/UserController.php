@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::paginate();
+        return User::with('role')->paginate();
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        $user = User::create($request->only('last_name', 'first_name', 'email')
+        $user = User::create($request->only('last_name', 'first_name', 'email', 'role_id')
             + ['password' => bcrypt(123)]);
 
         return response($user, 201);
@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::findOrFail($id);
+        return User::with('role')->findOrFail($id);
     }
 
     /**
@@ -61,6 +61,7 @@ class UserController extends Controller
             'last_name',
             'first_name',
             'email',
+            'role_id',
         ]));
         return response($user, 202);
     }
