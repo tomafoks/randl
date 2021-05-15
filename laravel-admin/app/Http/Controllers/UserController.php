@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResourse;
 use App\Models\User;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::with('role')->paginate();
+        $users = User::paginate();
+        return UserResourse::collection($users);
     }
 
     /**
@@ -33,7 +35,7 @@ class UserController extends Controller
         $user = User::create($request->only('last_name', 'first_name', 'email', 'role_id')
             + ['password' => bcrypt(123)]);
 
-        return response($user, 201);
+        return response(new UserResourse($user), 201);
     }
 
     /**
@@ -44,7 +46,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::with('role')->findOrFail($id);
+        $user = User::findOrFail($id);
+        return new UserResourse($user);
     }
 
     /**
@@ -63,7 +66,7 @@ class UserController extends Controller
             'email',
             'role_id',
         ]));
-        return response($user, 202);
+        return response(new UserResourse($user), 202);
     }
 
     /**
@@ -80,7 +83,7 @@ class UserController extends Controller
 
     public function user()
     {
-        return Auth::user();
+        return new UserResourse(Auth::user());
     }
 
     // Обновление профиля юзера
@@ -92,7 +95,7 @@ class UserController extends Controller
             'first_name',
             'email',
         ]));
-        return response($user, 202);
+        return response(new UserResourse($user), 202);
     }
 
     // Обновление пароля юзера
@@ -102,6 +105,6 @@ class UserController extends Controller
         $user->update([
             'password' => bcrypt($request->password),
         ]);
-        return response($user, 202);
+        return response(new UserResourse($user), 202);
     }
 }
