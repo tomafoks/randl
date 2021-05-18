@@ -21,6 +21,7 @@ class OrderController extends Controller
         return new OrderResource(Order::find($id));
     }
 
+    // export CSV firle
     function export()
     {
         $headers = [
@@ -41,7 +42,7 @@ class OrderController extends Controller
             //body
             foreach ($orders as $order) {
                 fputcsv($file, [$order->id, $order->name, $order->email, '', '', '']);
-                foreach ($order->orderItems() as $orderItem) {
+                foreach ($order->orderItems as $orderItem) {
                     fputcsv($file, ['', '', '', $orderItem->product_title, $orderItem->price, $orderItem->quantity]);
                 }
             };
