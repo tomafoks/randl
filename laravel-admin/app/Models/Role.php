@@ -22,4 +22,8 @@ class Role extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    function permissions(){
+        return $this->belongsToMany(Permission::class, 'role_permission');
+    }
 }
