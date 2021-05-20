@@ -54,6 +54,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'role_id',
     ];
 
     protected $guarded = ['id'];
@@ -85,5 +86,11 @@ class User extends Authenticatable
 
     function permissions() {
         return $this->role->permissions->pluck('name');
+    }
+
+    function hasAccess($access)
+    {
+        return $this->permissions()->contains($access);
+
     }
 }
