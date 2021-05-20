@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(path="/users",
+     *  @OA\Response(response="200",
+     *      description="User Collection",
+     *  )
+     * )
      */
+
     public function index()
     {
         Gate::authorize('view', 'users');
