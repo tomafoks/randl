@@ -7,9 +7,11 @@ React-and-Laravel
 ```sh
 	php artisan migrate --seed
 ```
-2) Installing OrderSeeder after major migrations
+2) Installing other seeds
 ```sh
 	php artisan db:seed --class=OrderSeeder
+	php artisan db:seed --class=PermissionSeeder
+	php artisan db:seed --class=RolePermissionSeeder
 ```
 3) Installing Laravel Passport 
 ```sh
