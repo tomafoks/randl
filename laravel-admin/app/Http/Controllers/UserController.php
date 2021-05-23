@@ -16,9 +16,12 @@ class UserController extends Controller
 {
 
     /**
-     * @OA\Get(path="/users",
-     *  @OA\Response(response="200",
-     *      description="User Collection",
+     * @OA\Get(
+     *      path="/users",
+     *      security={{"bearerAuth":{}}},
+     *      @OA\Response(
+     *          response="200",
+     *          description="User Collection",
      *  )
      * )
      */
