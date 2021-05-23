@@ -26,6 +26,14 @@
             }
         }
     },
+    "components": {
+        "securitySchemes": {
+            "beararAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
     "security": [
         []
     ]
