@@ -27,7 +27,7 @@ class Controller extends BaseController
      * )
      *
      * @OA\SecurityScheme(
-     *  securityScheme="beararAuth",
+     *  securityScheme="bearerAuth",
      *  type="http",
      *  scheme="bearer"
      * )

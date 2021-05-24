@@ -15,12 +15,16 @@
         }
     ],
     "paths": {
-        "/users/": {
+        "/users": {
             "get": {
+                "summary": "show all users",
                 "operationId": "App\\Http\\Controllers\\UserController::index",
                 "responses": {
                     "200": {
-                        "description": "User Collection"
+                        "description": "User Collection",
+                        "content": {
+                            "application/json": {}
+                        }
                     }
                 },
                 "security": [
@@ -33,7 +37,7 @@
     },
     "components": {
         "securitySchemes": {
-            "beararAuth": {
+            "bearerAuth": {
                 "type": "http",
                 "scheme": "bearer"
             }

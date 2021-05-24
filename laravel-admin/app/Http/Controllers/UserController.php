@@ -18,11 +18,15 @@ class UserController extends Controller
     /**
      * @OA\Get(
      *      path="/users",
+     *      summary="show all users",
      *      security={{"bearerAuth":{}}},
      *      @OA\Response(
+     *          @OA\MediaType(
+     *                  mediaType="application/json",
+     *          ),
      *          response="200",
      *          description="User Collection",
-     *  )
+     *      )
      * )
      */
     public function index()
