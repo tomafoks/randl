@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateInfoRequest;
-use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UpdateInfoRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Resources\UserResourse;
 use App\Models\User;
 use Gate;
@@ -20,12 +20,21 @@ class UserController extends Controller
      *      path="/users",
      *      summary="show all users",
      *      security={{"bearerAuth":{}}},
+     *      tags={"Users"},
      *      @OA\Response(
      *          @OA\MediaType(
      *                  mediaType="application/json",
      *          ),
      *          response="200",
      *          description="User Collection",
+     *      ),
+     *      @OA\Parameter(
+     *          name="page",
+     *          description="page number",
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
      *      )
      * )
      */
@@ -37,10 +46,25 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/users",
+     *      summary="create user",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Users"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *                  mediaType="application/json",
+     *          ),
+     *          response="201",
+     *          description="User create",
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/UserCreateRequest"
+     *          )
+     *      )
+     * )
      */
     public function store(UserCreateRequest $request)
     {
@@ -52,10 +76,28 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/users/{id}",
+     *      summary="show user from id",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Users"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *                  mediaType="application/json",
+     *          ),
+     *          response="200",
+     *          description="User",
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id user",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -65,11 +107,34 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *      path="/users/{id}",
+     *      summary="create user",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Users"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *                  mediaType="application/json",
+     *          ),
+     *          response="202",
+     *          description="User update",
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id user",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/UserUpdateRequest"
+     *          )
+     *      )
+     * )
      */
     public function update(UserUpdateRequest $request, $id)
     {
@@ -85,10 +150,27 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/users/{id}",
+     *      summary="deleted user",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Users"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *                  mediaType="application/json",
+     *          ),
+     *          response="204",
+     *          description="User deleted",
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id user",
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer",
+     *          )
+     *      )
+     * )
      */
     public function destroy($id)
     {
@@ -97,6 +179,21 @@ class UserController extends Controller
         return response(null, 204);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/user",
+     *      summary="show user",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Profile"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *                  mediaType="application/json",
+     *          ),
+     *          response="200",
+     *          description="User",
+     *      )
+     * )
+     */
     public function user()
     {
         $user = Auth::user();
@@ -107,7 +204,27 @@ class UserController extends Controller
         ]);
     }
 
-    // Обновление профиля юзера
+    /**
+     * @OA\Put(
+     *      path="/users/info",
+     *      summary="Update user info",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Profile"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          ),
+     *          response="202",
+     *          description="Update user info",
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/UpdateInfoRequest"
+     *          )
+     *      )
+     * )
+     */
     public function updateInfo(UpdateInfoRequest $request)
     {
         $user = Auth::user();
@@ -120,6 +237,27 @@ class UserController extends Controller
     }
 
     // Обновление пароля юзера
+    /**
+     * @OA\Put(
+     *      path="/users/password",
+     *      summary="Update user password",
+     *      security={{"bearerAuth":{}}},
+     *      tags={"Profile"},
+     *      @OA\Response(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          ),
+     *          response="202",
+     *          description="Update user password",
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/UpdatePasswordRequest"
+     *          )
+     *      )
+     * )
+     */
     public function updatePassword(UpdatePasswordRequest $request)
     {
         $user = Auth::user();
