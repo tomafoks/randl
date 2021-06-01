@@ -7,8 +7,7 @@ class Login extends Component {
         return (
             <main className="form-signin">
                 <form>
-                    <img className="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
-                        <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                        <h1 className="h4 mb-3 fw-normal text-center">Вход в систему</h1>
 
                         <div className="form-floating">
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
