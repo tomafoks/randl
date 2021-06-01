@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Public.css';
 
 
 class Login extends Component {
@@ -17,13 +18,7 @@ class Login extends Component {
                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
-
-                        <div className="checkbox mb-3">
-                            <label>
-                                <input type="checkbox" value="remember-me" /> Remember me</label>
-                        </div>
                         <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                        <p className="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
                 </form>
             </main>
         )
