@@ -20,7 +20,8 @@ class Login extends Component {
         });
         // создаем локальное хранилеще с полученным токеном
         localStorage.setItem('token', response.data.token);
-        
+        axios.defaults.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+
         this.setState({
             redirect: true
         })
