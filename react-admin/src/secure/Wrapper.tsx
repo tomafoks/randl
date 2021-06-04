@@ -13,7 +13,6 @@ class Wrapper extends Component {
     componentDidMount = async () => {
         try {
             const response = await axios.get('user');
-            // console.log(response);
         } catch (e) {
             this.setState({
                 redirect: true
@@ -32,7 +31,6 @@ class Wrapper extends Component {
                     <div className="row">
                         <Nav />
                         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                            <Menu />
                             {this.props.children}
                         </main>
                     </div>

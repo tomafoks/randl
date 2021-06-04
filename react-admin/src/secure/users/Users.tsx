@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Wrapper from '../Wrapper';
 import axios from 'axios';
 import { User } from '../../classes/user';
+import { Link } from 'react-router-dom';
 
 class Users extends Component {
     state = {
@@ -18,7 +19,7 @@ class Users extends Component {
         return (
             <Wrapper>
                 <div className="btn-toolbar mb-2 mb-md-0">
-                    <a type="button" className="btn btn-sm btn-outline-secondary">Добавить</a>
+                    <Link to={'/users/create'} type="button" className="btn btn-sm btn-outline-secondary">Добавить</Link>
                 </div>
 
                 <div className="table-responsive">
