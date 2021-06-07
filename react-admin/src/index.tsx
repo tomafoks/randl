@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost/api/';
+axios.defaults.baseURL = 'http://randl.com/api/';
 axios.defaults.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
 
 ReactDOM.render(

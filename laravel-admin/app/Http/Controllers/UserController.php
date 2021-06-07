@@ -109,7 +109,7 @@ class UserController extends Controller
     /**
      * @OA\Put(
      *      path="/users/{id}",
-     *      summary="create user",
+     *      summary="update user",
      *      security={{"bearerAuth":{}}},
      *      tags={"Users"},
      *      @OA\Response(

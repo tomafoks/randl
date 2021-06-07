@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost/api",
+            "url": "http://randl.com/api",
             "description": "Admin API Server"
         }
     ],
@@ -113,7 +113,7 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "create user",
+                "summary": "update user",
                 "operationId": "App\\Http\\Controllers\\UserController::update",
                 "parameters": [
                     {

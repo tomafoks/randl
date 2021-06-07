@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Wrapper from '../Wrapper';
 import axios from 'axios';
-import { User } from '../../classes/user';
 import { Link } from 'react-router-dom';
+import { User } from '../../classes/User';
 
 class Users extends Component {
     state = {
@@ -10,20 +10,26 @@ class Users extends Component {
     }
 
     page = 1;
+    last_page = 0;
 
     componentDidMount = async () => {
         const response = await axios.get(`users?page=${this.page}`);
         this.setState({
             users: response.data.data
-        })
+        });
+        this.last_page = response.data.meta.last_page;       
+        console.log(this.page);
+        
     }
 
     next = async () => {
-        this.page++;  
+        if(this.page === this.last_page) return;
+        this.page++;
         await this.componentDidMount();
     }
 
     back = async () => {
+        if(this.page === 1) return;
         this.page--;
         await this.componentDidMount();
     }
@@ -70,8 +76,8 @@ class Users extends Component {
                 </div>
                 <nav>
                     <ul className="pagination">
-                        <li className="page-item"><a href="" className="page-link" onClick={this.back}>Назад</a></li>
-                        <li className="page-item"><a href="" className="page-link" onClick={this.next}>В перед</a></li>
+                        <li className="page-item"><a href="#" className="page-link" onClick={this.back}>Назад</a></li>
+                        <li className="page-item"><a href="#" className="page-link" onClick={this.next}>В перед</a></li>
                     </ul>
                 </nav>
             </Wrapper>

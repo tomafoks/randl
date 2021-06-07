@@ -31,7 +31,7 @@ class Nav extends Component {
                                 </a>
                         </li>
                         <li className="nav-item">
-                            <NavLink to={'/dashboard'} className="nav-link active" aria-current="page">
+                            <NavLink to={'/dashboard'} className="nav-link" aria-current="page">
                                 <span data-feather="home"></span>
                                 Главния
                             </NavLink>

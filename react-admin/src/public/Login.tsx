@@ -11,13 +11,14 @@ class Login extends Component {
         redirect: false
     }
 
-    submit = async (e: SyntheticEvent) => {
+    submit = async (e: SyntheticEvent) => {        
         e.preventDefault()
         const response = await axios.post('login', {
             email: this.email,
             password: this.password,
 
         });
+        console.log(response);
         // создаем локальное хранилеще с полученным токеном
         localStorage.setItem('token', response.data.token);
         axios.defaults.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
