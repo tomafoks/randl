@@ -18,7 +18,8 @@ React-and-Laravel
 	php artisan passport:install
 ```
 ### install react:
-
+```sh
 1) npm install
 2) npm start
 3) в src/index.tsx изменить строку: axios.defaults.baseURL = 'поменять на нужный домен/api/';
+```

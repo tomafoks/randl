@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://randl.com/api",
+            "url": "http://localhost/api",
             "description": "Admin API Server"
         }
     ],
