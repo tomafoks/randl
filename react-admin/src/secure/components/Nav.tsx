@@ -43,6 +43,12 @@ class Nav extends Component {
                             </NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink to={'/roles'} className="nav-link">
+                                <span data-feather="file"></span>
+                                Роли
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="#">
                                 <span data-feather="shopping-cart"></span>
                             </a>
