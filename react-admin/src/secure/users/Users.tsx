@@ -17,21 +17,28 @@ class Users extends Component {
         this.setState({
             users: response.data.data
         });
-        this.last_page = response.data.meta.last_page;       
-        console.log(this.page);
-        
+        this.last_page = response.data.meta.last_page;
     }
 
     next = async () => {
-        if(this.page === this.last_page) return;
+        if (this.page === this.last_page) return;
         this.page++;
         await this.componentDidMount();
     }
 
     back = async () => {
-        if(this.page === 1) return;
+        if (this.page === 1) return;
         this.page--;
         await this.componentDidMount();
+    }
+
+    delete = async (id: number) => {
+        if (window.confirm('Удалить прользователя?')) {
+            await axios.delete(`users/${id}`);
+            this.setState({
+                users: this.state.users.filter((u: User) => u.id !== id)
+            })
+        }
     }
 
     render() {
@@ -64,7 +71,9 @@ class Users extends Component {
                                             <td>
                                                 <div className="btn-group mr-2">
                                                     <a type="button" className="btn btn-sm btn-outline-secondary">Изменить</a>
-                                                    <a type="button" className="btn btn-sm btn-outline-secondary">Удалить</a>
+                                                    <a type="button" className="btn btn-sm btn-outline-secondary"
+                                                        onClick={() => this.delete(user.id)}
+                                                    >Удалить</a>
                                                 </div>
                                             </td>
                                         </tr>
