@@ -9,6 +9,7 @@ import Login from './public/Login';
 import Register from './public/Register';
 import RedirectToDahboard from './secure/RedirectToDahboard';
 import UserCreate from './secure/users/UserCreate';
+import UserEdit from './secure/users/UserEdit';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path={'/dashboard'} exact component={Dashboard} />
         <Route path={'/users'} component={Users} exact/>
         <Route path={'/users/create'} component={UserCreate} />
+        <Route path={'/users/:id/edit'} component={UserEdit} />
         <Route path={'/login'} component={Login} />
         <Route path={'/register'} component={Register} />
       </BrowserRouter>
