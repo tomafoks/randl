@@ -41,6 +41,10 @@ class Users extends Component {
         }
     }
 
+    editUser = (id: number) => {
+
+    }
+
     render() {
         return (
             <Wrapper>
@@ -70,7 +74,9 @@ class Users extends Component {
                                             <td>{user.role.name}</td>
                                             <td>
                                                 <div className="btn-group mr-2">
-                                                    <a type="button" className="btn btn-sm btn-outline-secondary">Изменить</a>
+                                                    <a type="button" className="btn btn-sm btn-outline-secondary"
+                                                        onClick={() => this.editUser(user.id)}
+                                                    >Изменить</a>
                                                     <a type="button" className="btn btn-sm btn-outline-secondary"
                                                         onClick={() => this.delete(user.id)}
                                                     >Удалить</a>
