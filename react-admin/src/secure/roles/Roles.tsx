@@ -21,7 +21,7 @@ export default class Roles extends Component {
         if (window.confirm('Удалить роль?')) {
             await axios.delete(`roles/${id}`);
             this.setState({
-                users: this.state.roles.filter((r: Role) => r.id !== id)
+                roles: this.state.roles.filter((r: Role) => r.id !== id)
             })
         }
     }
